@@ -2,8 +2,23 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
+    
 
 class Order(models.Model):
+    
+    CITY_CHOICES = (
+        ('Рязань', 'Рязань'),
+        ('Тула', 'Тула'),
+        ('Владимир', 'Владимир'),
+    )
+    
+    AIRPORT_CHOICES = (
+        ('Домодедово', 'Домодедово'),
+        ('Внуково', 'Внуково'),
+        ('Шереметьево', 'Шереметьево'),
+        ('Жуковский', 'Жуковский'),
+    )
+
     author = models.ForeignKey(
         User,
         verbose_name='Заказчик',
@@ -22,25 +37,37 @@ class Order(models.Model):
     city = models.CharField(
         verbose_name='Город',
         max_length=128,
-        blank=False
+        choices=CITY_CHOICES,
+        default='',
     )
     
     address = models.CharField(
         verbose_name='Адрес',
         max_length=256,
-        blank=False
     )
     
     airport = models.CharField(
         verbose_name='Аэропорт',
         max_length=64,
-        blank=False
+        choices=AIRPORT_CHOICES,
+        default='',
+    )
+    
+    date = models.DateField(
+        verbose_name='Дата подачи авто',
+        null=False
+    )
+    
+    time = models.TimeField(
+        verbose_name='Время подачи авто',
+        auto_now=False,
+        auto_now_add=False,
+        null=False
     )
     
     telephone = models.CharField(
         verbose_name='Телефон',
         max_length=11,
-        blank=False
     )
 
     comment = models.CharField(
