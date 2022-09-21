@@ -26,7 +26,11 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "orders.apps.OrdersConfig",
+    "users.apps.UsersConfig",
 ]
+
+LOGIN_URL = 'users:login'
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -40,10 +44,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "tripincar.urls"
 
+TEMPLATES_DIR = BASE_DIR / 'templates'
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [TEMPLATES_DIR],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -108,7 +114,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = "static/"
+STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_URL = '/static/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
