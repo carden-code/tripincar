@@ -3,7 +3,7 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse('Главная')
+    return render(request, template_name='index.html')
 
 def orders_list(request):
     return HttpResponse('Список заказов')
