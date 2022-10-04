@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Новый заказ{% endblock %}
 {% block content %}
-{% comment %} {% load user_filters %} {% endcomment %}
-  {% comment %} {% with request.resolver_match.view_name as view_name %} {% endcomment %}
+{% load user_filters %}
+  {% with request.resolver_match.view_name as view_name %}
     <main>
       <div class="container py-5">
         <div class="row justify-content-center">
@@ -10,9 +10,9 @@
             <div class="card">
               <div class="card-header"> 
                 {% if view_name  == 'orders:order_create' %}
-                Добавить запись
+                Новый заказ
                 {% else %}
-                Редактировать запись
+                Редактировать заказ
                 {% endif %}               
               </div>
               <div class="card-body">
@@ -25,7 +25,7 @@
                   {% for line in form %} 
                   <div class="form-group row my-3 p-3">
                     {{ line.label }}
-                    {{ line }}
+                    {{ line|addclass:'form-control' }}
                   </div>
                   {% endfor %}            
                   {% comment %} <div class="form-group row my-3 p-3">
@@ -50,9 +50,9 @@
                   <div class="d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary">
                       {% if view_name  == 'orders:order_create' %}
-                        Сохранить
+                        Заказать
                       {% else %}
-                        Добавить
+                        Сохранить
                       {% endif %}
                     </button>
                   </div>
@@ -63,7 +63,7 @@
         </div>
       </div>
     </main>
-  {% comment %} {% endwith %} {% endcomment %}
+  {% endwith %}
 {% endblock %}
 
 

@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 from django.contrib.auth import get_user_model
 
@@ -77,7 +78,8 @@ class Order(models.Model):
     )
     
     status = models.BooleanField(
-        verbose_name='Статус заказа'
+        verbose_name='Статус заказа',
+        default=False
     )
     
     pub_date = models.DateTimeField(

@@ -27,10 +27,11 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "orders.apps.OrdersConfig",
     "users.apps.UsersConfig",
+    "core",
 ]
 
 LOGIN_URL = 'users:login'
-
+LOGIN_REDIRECT_URL = 'orders:index'
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

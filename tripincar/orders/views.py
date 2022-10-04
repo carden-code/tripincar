@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
 from orders.forms import OrderForm
 
@@ -6,6 +7,7 @@ from orders.forms import OrderForm
 def index(request):
     return render(request, template_name='posts/index.html')
 
+@login_required
 def order_create(request):
     """Обработчик создания заказа."""
     template = 'orders/create_order.html'
