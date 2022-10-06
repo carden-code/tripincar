@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Заказ {{ order|truncatechars:30 }}{% endblock %}
+{% block content %}
+  <main>
+    <div class="row">
+      <aside class="col-12 col-md-3">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            Дата публикации: {{ order.pub_date|date:"d E Y" }}
+          </li>
+            <li class="list-group-item">
+              Автор: {{ order.author.get_full_name }}
+            </li>
+            <li class="list-group-item">
+              <a href="{% url 'orders:profile' username=order.author %}">
+                все заказы пользователя
+              </a>
+            </li>
+          {% if order.author == user %}
+            <li class="list-group-item">
+              <a href="{% url 'orders:order_edit' order.pk %}">
+                <button type="button" class="btn btn-success btn-sm">
+                  Редактировать заказ
+                </button>
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </aside>
+    </div> 
+  </main>
+{% endblock %}
+    
