@@ -19,16 +19,20 @@
       <ul class="navbar-nav nav-tabs">
         <li class="nav-item active">
           <a class="nav-link {% if view_name  == 'about:author' %}active{% endif %}"
-            href="">Об авторе</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link {% if view_name  == 'about:tech' %}active{% endif %}"
-            href="">Технологии</a>
+            href="">Тарифы</a>
         </li>
         {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link {% if view_name  == 'orders:order_create' %}active{% endif %}"
-            href="">Новая запись</a>
+            href="">Заказать в аэропорт</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if view_name  == 'orders:order_create' %}active{% endif %}"
+            href="">Заказать из аэропорта</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if view_name  == 'orders:order_create' %}active{% endif %}"
+            href="">Мои заказы</a>
         </li>
         <li class="nav-item">
           <a class="nav-link {% if view_name  == 'users:password_change' %}active{% endif %}"
