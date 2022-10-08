@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{ order_list }}
+{% endblock %}
+{% block content %}
+  <main>
+    <div class="container py-5">
+      {% for order in order_list %}
+        <h1>{{ order }}</h1>
+          <article>
+            <ul>
+              <li>
+                Автор: {{ order.author }}
+              </li>
+              <li>
+                Водитель: {{ order.pub_date|date:'d E Y' }}
+              </li>
+              <li>
+                Город: {{ order.city }}
+              </li>
+              <li>
+                Адрес: {{ order.address }}
+              </li>
+              <li>
+                Аэропорт: {{ order.airport }}
+              </li>
+              <li>
+                Дата: {{ order.date }}
+              </li>
+              <li>
+                Время: {{ order.time}}
+              </li>
+              <li>
+                Телефон: {{ order.telephone }}
+              </li>
+            </ul> 
+            <p>
+              Комментарий: {{ order.comment }}
+            </p>
+        {% if not forloop.last %}<hr>{% endif %}
+      {% endfor %}
+    </div>
+  </main>
+{% endblock %}

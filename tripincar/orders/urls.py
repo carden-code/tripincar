@@ -7,6 +7,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     # path('orders/', views.orders_list),
     # path('order/<int:pk>/', views.order_detail),
-    path('create/', views.order_create, name='order_create'),
-
+    # path('create/', views.order_create, name='order_create'),
+    path('order_list/', views.OrderListView.as_view(), name='order_list'),
 ]

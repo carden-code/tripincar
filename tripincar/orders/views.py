@@ -1,28 +1,10 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView
+from .models import Order
 
-from orders.forms import OrderForm
+def index(requesst):
+    pass
 
 
-def index(request):
-    return render(request, template_name='posts/index.html')
-
-@login_required
-def order_create(request):
-    """Обработчик создания заказа."""
-    template = 'orders/create_order.html'
-    form = OrderForm(
-        request.POST or None,
-        files=request.FILES or None
-    )
-
-    if form.is_valid():
-        order = form.save(commit=False)
-        order.author = request.user
-        order.save()
-        return redirect('orders:index')
-
-    context = {
-        'form': form
-    }
-    return render(request, template_name=template, context=context)
+class OrderListView(ListView):
+    queryset = Order.objects.order_by('-pub_date')
+    context_object_name = 'order_list'
