@@ -54,6 +54,11 @@ class Order(models.Model):
         default='',
     )
     
+    flight_number = models.CharField(
+        verbose_name='Номер рейса',
+        max_length=16
+    )
+    
     date = models.DateField(
         verbose_name='Дата подачи авто',
         null=False
@@ -66,12 +71,19 @@ class Order(models.Model):
         null=False
     )
     
+    departure_time = models.TimeField(
+        verbose_name='Время вылета',
+        auto_now=False,
+        auto_now_add=False,
+        null=False
+    )
+    
     telephone = models.CharField(
         verbose_name='Телефон',
         max_length=11,
     )
 
-    comment = models.CharField(
+    comment = models.TextField(
         verbose_name='Комментарий',
         max_length=256,
         blank=True

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}
+  Профайл пользователя {{ username }}
+{% endblock %}
+{% block content %}
+  <main>
+    <div class="container py-5 mb-5">
+      <h1>Все заказы пользователя {{ username }}</h1>
+      <h3>Всего заказов: {{ orders_user|length }}</h3>
+      <article>
+        {% for order in orders_user %}
+          <ul>
+            <li>Автор: {{ order.author.get_full_name }}</li>
+            <li>Дата публикации: {{ order.pub_date|date:"d E Y" }}</li>
+          </ul>
+          <p>
+            <a href="{% url 'orders:order_detail' order.pk %}">
+              подробная информация
+            </a>
+          </p>
+          {% if order.author == user %}
+            <a href="{% url 'orders:order_edit' order.pk %}">
+              <button type="button" class="btn btn-success btn-sm">
+                Редактировать
+              </button>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </article>
+    </div>
+  </main>
+{% endblock %}

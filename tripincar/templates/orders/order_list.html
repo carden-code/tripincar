@@ -5,7 +5,7 @@
 {% block content %}
   <main>
     <div class="container py-5">
-      {% for order in order_list %}
+      {% for order in orders %}
         <h1>{{ order }}</h1>
           <article>
             <ul>
@@ -13,7 +13,7 @@
                 Автор: {{ order.author }}
               </li>
               <li>
-                Водитель: {{ order.pub_date|date:'d E Y' }}
+                Водитель: {{ order.driver}}
               </li>
               <li>
                 Город: {{ order.city }}
@@ -25,10 +25,16 @@
                 Аэропорт: {{ order.airport }}
               </li>
               <li>
-                Дата: {{ order.date }}
+                Дата подачи: {{ order.date }}
               </li>
               <li>
-                Время: {{ order.time}}
+                Время подачи: {{ order.time}}
+              </li>
+              <li>
+                Время вылета: {{ order.departure_time}}
+              </li>
+              <li>
+                Номер рейса: {{ order.flight_number}}
               </li>
               <li>
                 Телефон: {{ order.telephone }}

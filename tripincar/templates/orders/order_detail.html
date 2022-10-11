@@ -12,7 +12,7 @@
               Автор: {{ order.author.get_full_name }}
             </li>
             <li class="list-group-item">
-              <a href="{% url 'orders:profile' username=order.author %}">
+              <a href="{% url 'users:profile' username=order.author.username %}">
                 все заказы пользователя
               </a>
             </li>

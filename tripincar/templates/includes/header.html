@@ -18,41 +18,41 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav nav-tabs">
         <li class="nav-item active">
-          <a class="nav-link {% if view_name  == 'about:author' %}active{% endif %}"
+          <a class="nav-link {% if view_name  == 'orders:tariffs' %}active{% endif %}"
             href="">Тарифы</a>
         </li>
         {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link {% if view_name  == 'orders:order_create' %}active{% endif %}"
-            href="">Заказать в аэропорт</a>
+            href="{% url 'orders:order_create' %}">Заказать в аэропорт</a>
         </li>
         <li class="nav-item">
           <a class="nav-link {% if view_name  == 'orders:order_create' %}active{% endif %}"
-            href="">Заказать из аэропорта</a>
+            href="{% url 'orders:order_create' %}">Заказать из аэропорта</a>
         </li>
         <li class="nav-item">
           <a class="nav-link {% if view_name  == 'orders:order_create' %}active{% endif %}"
-            href="">Мои заказы</a>
+            href="{% url 'users:profile' request.user.username %}">Мои заказы</a>
         </li>
         <li class="nav-item">
           <a class="nav-link {% if view_name  == 'users:password_change' %}active{% endif %}"
-            href="">Изменить пароль</a>
+            href="{% url 'users:password_change' %}">Изменить пароль</a>
         </li>
         <li class="nav-item">
           <a class="nav-link {% if view_name  == 'users:logout' %}active{% endif %}"
-            href="">Выйти</a>
+            href="{% url 'users:logout' %}">Выйти</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#">Пользователь: {{ user.username }}</a>
+          <a class="nav-link disabled" >Пользователь: {{ user.username }}</a>
         </li>
         {% else %}
         <li class="nav-item">
           <a class="nav-link {% if view_name  == 'users:login' %}active{% endif %}"
-            href="">Войти</a>
+            href="{% url 'users:login' %}">Войти</a>
         </li>
         <li class="nav-item">
           <a class="nav-link {% if view_name  == 'users:signup' %}active{% endif %}"
-            href="">Регистрация</a>
+            href="{% url 'users:signup' %}">Регистрация</a>
         </li>
         {% endif %}
       </ul>
