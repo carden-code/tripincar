@@ -7,7 +7,6 @@ from .forms import OrderForm
 
 User = get_user_model()
 
-
 def index(request):
     return render(request, template_name='orders/index.html')
 
@@ -18,7 +17,6 @@ def order_list(request):
         'orders': orders,
     }
     return render(request, template_name=template, context=context)
-
 
 def order_detail(request, pk):
     """Обработчик страницы заказа в деталях."""
@@ -33,7 +31,6 @@ def order_detail(request, pk):
         'form': form_order,
     }
     return render(request, template_name=template, context=context)
-
 
 @login_required
 def order_create(request):
@@ -54,7 +51,6 @@ def order_create(request):
     }
     return render(request, template_name=template, context=context)
 
-
 @login_required
 def order_edit(request, pk):
     """Обработчик редактирования поста."""
@@ -73,9 +69,3 @@ def order_edit(request, pk):
         'form': form,
     }
     return render(request, template_name=template, context=context)
-    
-
-
-# class OrderListView(ListView):
-#     queryset = Order.objects.order_by('-pub_date')
-#     context_object_name = 'order_list'
