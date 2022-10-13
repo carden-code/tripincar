@@ -6,14 +6,17 @@
       <aside class="col-12 col-md-3">
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
-            Дата публикации: {{ order.pub_date|date:"d E Y" }}
+            Пользователь: {{ order.author.username }}
           </li>
-            <li class="list-group-item">
-              Автор: {{ order.author.get_full_name }}
-            </li>
+          {% for label in form %}
+              <li class="list-group-item">
+                {{ label.label }}:
+                {{ label.value }}
+              </li>
+          {% endfor %}
             <li class="list-group-item">
               <a href="{% url 'users:profile' username=order.author.username %}">
-                все заказы пользователя
+                Все заказы пользователя
               </a>
             </li>
           {% if order.author == user %}

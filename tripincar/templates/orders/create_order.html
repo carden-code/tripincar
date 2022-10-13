@@ -27,26 +27,7 @@
                     {{ line.label }}
                     {{ line|addclass:'form-control' }}
                   </div>
-                  {% endfor %}            
-                  {% comment %} <div class="form-group row my-3 p-3">
-                    <label for="id_group">
-                      Group                  
-                    </label>
-                    {{ form.author}}
-                    {{ form.group|addclass:'form-control' }}
-                      <small class="form-text text-muted">
-                        {{ form.group.help_text }}
-                      </small>
-                  </div>
-                  <div class="form-group row my-3 p-3">
-                    <label for="id_image">
-                      Image                  
-                    </label>
-                    {{ form.image|addclass:'form-control' }}
-                      <small class="form-text text-muted">
-                        {{ form.image.help_text }}
-                      </small>
-                  </div> {% endcomment %}
+                  {% endfor %}
                   <div class="d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary">
                       {% if view_name  == 'orders:order_create' %}

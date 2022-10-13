@@ -21,7 +21,7 @@ def order_list(request):
 def order_detail(request, pk):
     """Обработчик страницы заказа в деталях."""
     order = get_object_or_404(Order, id=pk)
-    form_order = OrderForm()
+    form_order = OrderForm(instance=order)
     user = order.author
     count_orders = user.orders.count()
     template = 'orders/order_detail.html'
@@ -34,7 +34,7 @@ def order_detail(request, pk):
 
 @login_required
 def order_create(request):
-    """Обработчик создания поста."""
+    """Обработчик создания заказа."""
     template = 'orders/create_order.html'
     form = OrderForm(
         request.POST or None,
@@ -44,7 +44,7 @@ def order_create(request):
         order = form.save(commit=False)
         order.author = request.user
         order.save()
-        return redirect(template='orders:index')
+        return redirect('orders:order_detail', order.pk)
 
     context = {
         'form': form
@@ -53,9 +53,9 @@ def order_create(request):
 
 @login_required
 def order_edit(request, pk):
-    """Обработчик редактирования поста."""
+    """Обработчик редактирования заказа."""
     order = get_object_or_404(Order, id=pk)
-
+    print(type(order.date))
     form = OrderForm(
         request.POST or None,
         instance=order

@@ -14,10 +14,14 @@ class OrderForm(ModelForm):
             'airport',
             'date',
             'time',
+            'departure_time',
+            'flight_number',
             'telephone',
             'comment',
         )
         widgets = {
-            'date': DateInput(attrs={'type': 'date'}),
+            'date': DateInput(attrs={'type': 'date'},
+                              format=('%Y-%m-%d'),),
             'time': TimeInput(attrs={'type': 'time'}),
+            'departure_time': TimeInput(attrs={'type': 'time'}),
         }

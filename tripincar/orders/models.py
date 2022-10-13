@@ -1,5 +1,5 @@
-from email.policy import default
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -61,7 +61,6 @@ class Order(models.Model):
     
     date = models.DateField(
         verbose_name='Дата подачи авто',
-        null=False
     )
     
     time = models.TimeField(

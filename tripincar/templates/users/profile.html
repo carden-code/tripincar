@@ -10,12 +10,12 @@
       <article>
         {% for order in orders_user %}
           <ul>
-            <li>Автор: {{ order.author.get_full_name }}</li>
+            <li>Автор: {{ username }}</li>
             <li>Дата публикации: {{ order.pub_date|date:"d E Y" }}</li>
           </ul>
           <p>
             <a href="{% url 'orders:order_detail' order.pk %}">
-              подробная информация
+              Подробная информация
             </a>
           </p>
           {% if order.author == user %}
