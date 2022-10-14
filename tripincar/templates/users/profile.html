@@ -10,6 +10,7 @@
       <article>
         {% for order in orders_user %}
           <ul>
+            <li>Заказ: {{ order }}</li>
             <li>Автор: {{ username }}</li>
             <li>Дата публикации: {{ order.pub_date|date:"d E Y" }}</li>
           </ul>
@@ -22,6 +23,11 @@
             <a href="{% url 'orders:order_edit' order.pk %}">
               <button type="button" class="btn btn-success btn-sm">
                 Редактировать
+              </button>
+            </a>
+            <a href="{% url 'orders:order_delete' order.pk %}">
+              <button type="button" class="btn btn-danger btn-sm">
+                Отменить заказ
               </button>
             </a>
           {% endif %}
