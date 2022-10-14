@@ -10,6 +10,7 @@ User = get_user_model()
 def index(request):
     return render(request, template_name='orders/index.html')
 
+@login_required
 def order_list(request):
     orders = Order.objects.order_by('-pub_date')
     template = 'orders/order_list.html'
@@ -18,6 +19,7 @@ def order_list(request):
     }
     return render(request, template_name=template, context=context)
 
+@login_required
 def order_detail(request, pk):
     """Обработчик страницы заказа в деталях."""
     order = get_object_or_404(Order, id=pk)
@@ -55,7 +57,6 @@ def order_create(request):
 def order_edit(request, pk):
     """Обработчик редактирования заказа."""
     order = get_object_or_404(Order, id=pk)
-    print(type(order.date))
     form = OrderForm(
         request.POST or None,
         instance=order
@@ -69,3 +70,10 @@ def order_edit(request, pk):
         'form': form,
     }
     return render(request, template_name=template, context=context)
+
+@login_required
+def order_delete(request, pk):
+    user_name = request.user.username
+    order = get_object_or_404(Order, id=pk)
+    order.delete()
+    return redirect('users:profile', user_name)
