@@ -13,7 +13,7 @@ class UserRole:
 class User(AbstractUser):
     ROLES = (
         (UserRole.USER, 'USER'),
-        (UserRole.DRIVER, 'driver'),
+        (UserRole.DRIVER, 'DRIVER'),
         (UserRole.ADMIN, 'ADMIN')
     )
     username = models.CharField(
@@ -72,4 +72,3 @@ class User(AbstractUser):
     @property
     def is_driver(self):
         return self.role == UserRole.DRIVER
-
