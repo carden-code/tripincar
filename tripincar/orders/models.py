@@ -3,6 +3,13 @@ from django.utils import timezone
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
+
+
+class Price(models.Model):
+    price = models.IntegerField(
+        verbose_name='Стоимость',
+        blank=True
+    )
     
 
 class Order(models.Model):
@@ -88,6 +95,14 @@ class Order(models.Model):
         blank=True
     )
     
+    price = models.ForeignKey(
+        Price,
+        verbose_name='Стоимость',
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True
+    )
+    
     status = models.BooleanField(
         verbose_name='Статус заказа',
         default=False
@@ -112,3 +127,4 @@ class Order(models.Model):
         
     def __str__(self):
         return f'{self.airport} -> {self.city}'
+
