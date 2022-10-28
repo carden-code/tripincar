@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils import timezone
+from django.core.validators import MinValueValidator
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -8,9 +8,30 @@ User = get_user_model()
 class Price(models.Model):
     price = models.IntegerField(
         verbose_name='Стоимость',
-        blank=True
+        blank=True,
+        validators=[
+            MinValueValidator(3000),
+        ]
     )
-    
+        
+    def __str__(self):
+        return f'Стоимость: {self.price}'
+
+
+class Airport(models.Model):
+    name = models.CharField(
+        verbose_name='Аэропорт',
+        max_length=128,
+    )
+
+    start_price = models.ForeignKey(
+        Price,
+        verbose_name='Стартовая стоимость',
+        on_delete=models.SET_NULL,
+        default=3000,
+        null=True
+    )
+        
 
 class Order(models.Model):
     
