@@ -5,17 +5,17 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-class Price(models.Model):
-    price = models.IntegerField(
-        verbose_name='Стоимость',
-        blank=True,
-        validators=[
-            MinValueValidator(3000),
-        ]
-    )
+# class Price(models.Model):
+#     price = models.IntegerField(
+#         verbose_name='Стоимость',
+#         blank=True,
+#         validators=[
+#             MinValueValidator(3000),
+#         ]
+#     )
         
-    def __str__(self):
-        return f'Стоимость: {self.price}'
+#     def __str__(self):
+#         return f'Стоимость: {self.price}'
 
 
 class Airport(models.Model):
@@ -24,12 +24,8 @@ class Airport(models.Model):
         max_length=128,
     )
 
-    start_price = models.ForeignKey(
-        Price,
+    start_price = models.IntegerField(
         verbose_name='Стартовая стоимость',
-        on_delete=models.SET_NULL,
-        default=3000,
-        null=True
     )
         
 
@@ -75,11 +71,11 @@ class Order(models.Model):
         max_length=256,
     )
     
-    airport = models.CharField(
+    airport = models.ForeignKey(
+        Airport,
         verbose_name='Аэропорт',
-        max_length=64,
-        choices=AIRPORT_CHOICES,
-        default='',
+        on_delete=models.SET_NULL,
+        null=True
     )
     
     flight_number = models.CharField(
@@ -116,10 +112,8 @@ class Order(models.Model):
         blank=True
     )
     
-    price = models.ForeignKey(
-        Price,
+    price = models.IntegerField(
         verbose_name='Стоимость',
-        on_delete=models.SET_NULL,
         blank=True,
         null=True
     )
