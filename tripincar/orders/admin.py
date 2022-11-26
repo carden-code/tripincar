@@ -1,6 +1,13 @@
 from django.contrib import admin
 
-from .models import Order
+from .models import Airport, Order
+
+class AirportAdmin(admin.ModelAdmin):
+    list_display = (
+        'pk',
+        'name',
+        'start_price',
+    )
 
 
 class OrderAdmin(admin.ModelAdmin):
@@ -20,3 +27,4 @@ class OrderAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
 
 admin.site.register(Order, OrderAdmin)
+admin.site.register(Airport, AirportAdmin)

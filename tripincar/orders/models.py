@@ -1,21 +1,8 @@
+from email.policy import default
 from django.db import models
-from django.core.validators import MinValueValidator
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
-
-
-# class Price(models.Model):
-#     price = models.IntegerField(
-#         verbose_name='Стоимость',
-#         blank=True,
-#         validators=[
-#             MinValueValidator(3000),
-#         ]
-#     )
-        
-#     def __str__(self):
-#         return f'Стоимость: {self.price}'
 
 
 class Airport(models.Model):
@@ -27,6 +14,13 @@ class Airport(models.Model):
     start_price = models.IntegerField(
         verbose_name='Стартовая стоимость',
     )
+    
+    class Meta:
+        verbose_name = 'Аэропорт'
+        verbose_name_plural = 'Аэропорты'
+    
+    def __str__(self):
+        return f'{self.name}'
         
 
 class Order(models.Model):
@@ -42,6 +36,11 @@ class Order(models.Model):
         ('Внуково', 'Внуково'),
         ('Шереметьево', 'Шереметьево'),
         ('Жуковский', 'Жуковский'),
+    )
+    
+    number = models.IntegerField(
+        verbose_name='Номер',
+        default=0
     )
 
     author = models.ForeignKey(
@@ -94,11 +93,18 @@ class Order(models.Model):
         null=False
     )
     
+    departure_date = models.DateField(
+        verbose_name='Дата вылета',
+        auto_now=False,
+        auto_now_add=False,
+        null=False
+    )
+    
     departure_time = models.TimeField(
         verbose_name='Время вылета',
         auto_now=False,
         auto_now_add=False,
-        null=False
+        null=False,
     )
     
     telephone = models.CharField(
@@ -142,4 +148,9 @@ class Order(models.Model):
         
     def __str__(self):
         return f'{self.airport} -> {self.city}'
+    
+    def counter():
+        
+        pass
+        
 

@@ -6,12 +6,18 @@
       <aside class="col-12 col-md-3">
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
-            Пользователь: {{ order.author.username }}
+            Пользователь: {{ order.author.username }}<br>
+            Номер заказа: 0001
           </li>
           {% for label in form %}
               <li class="list-group-item">
-                {{ label.label }}:
-                {{ label.value }}
+                {% if label.label == 'Аэропорт' %}
+                  {{ label.label }}:
+                  {{ order.airport }}
+                {% else %}
+                  {{ label.label }}:
+                  {{ label.value }}
+                {% endif%}
               </li>
           {% endfor %}
             <li class="list-group-item">
