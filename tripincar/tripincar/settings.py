@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "orders.apps.OrdersConfig",
     "users.apps.UsersConfig",
     "core.apps.CoreConfig",
+    "phonenumber_field",
 ]
 
 LOGIN_URL = 'users:login'

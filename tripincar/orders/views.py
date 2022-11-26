@@ -45,6 +45,7 @@ def order_create(request):
     if form.is_valid():
         order = form.save(commit=False)
         order.author = request.user
+        order.telephone = request.user.telephone
         order.save()
         return redirect('orders:order_detail', order.pk)
 

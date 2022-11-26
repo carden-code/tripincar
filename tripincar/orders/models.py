@@ -2,6 +2,9 @@ from email.policy import default
 from django.db import models
 from django.contrib.auth import get_user_model
 
+from phonenumber_field.modelfields import PhoneNumberField
+
+
 User = get_user_model()
 
 
@@ -107,9 +110,10 @@ class Order(models.Model):
         null=False,
     )
     
-    telephone = models.CharField(
+    telephone = PhoneNumberField(
         verbose_name='Телефон',
-        max_length=11,
+        blank=True, 
+        region='RU'
     )
 
     comment = models.TextField(

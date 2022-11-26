@@ -3,6 +3,8 @@ from django.core import validators
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from phonenumber_field.modelfields import PhoneNumberField
+
 
 class UserRole:
     USER = 'user'
@@ -36,6 +38,11 @@ class User(AbstractUser):
         _('email'),
         max_length=254,
         unique=True,
+    )
+    
+    telephone = PhoneNumberField(
+        _('phone'),
+        region='RU'
     )
 
     role = models.CharField(
