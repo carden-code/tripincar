@@ -1,4 +1,3 @@
-from email.policy import default
 from django.db import models
 from django.contrib.auth import get_user_model
 
@@ -156,5 +155,24 @@ class Order(models.Model):
     def counter():
         
         pass
+
+
+class Favorite(models.Model):
+    order = models.ForeignKey(
+        Order,
+        verbose_name='Заказ',
+        on_delete=models.CASCADE,
+    )
+    driver = models.ForeignKey(
+        User,
+        verbose_name='Водитель',
+        on_delete=models.CASCADE,
+    )
+    
+    class Meta:
+        verbose_name = 'Принятый заказ'
+        verbose_name_plural = 'Принятые заказы'
         
+    def __str__(self):
+        return f'{self.driver} - {self.order}'
 

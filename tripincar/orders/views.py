@@ -34,12 +34,35 @@ def order_detail(request, pk):
     }
     return render(request, template_name=template, context=context)
 
+#context ={}
+  
+    # dictionary for initial data with 
+    # field names as keys
+    # initial_dict = {
+    #     "title" : "My New Title",
+    #     "description" : " A New Description",
+    #     "available":True,
+    #     "email":"abc@gmail.com"
+    # }
+  
+    # # add the dictionary during initialization
+    # form = GeeksForm(request.POST or None, initial = initial_dict)
+  
+    # context['form']= form
+    # return render(request, "home.html", context)
+
 @login_required
 def order_create(request):
     """Обработчик создания заказа."""
     template = 'orders/create_order.html'
+    phone = request.user.telephone
+    initial_dict = {
+        "telephone": phone
+    }
+    
     form = OrderForm(
         request.POST or None,
+        initial=initial_dict
     )
 
     if form.is_valid():

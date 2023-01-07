@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Airport, Order
+from .models import Airport, Favorite, Order
 
 class AirportAdmin(admin.ModelAdmin):
     list_display = (
@@ -25,6 +25,12 @@ class OrderAdmin(admin.ModelAdmin):
     search_fields = ('airport',)
     list_filter = ('pub_date',)
     empty_value_display = '-пусто-'
+    
+    
+class FavoriteAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'driver', 'order')
+
 
 admin.site.register(Order, OrderAdmin)
 admin.site.register(Airport, AirportAdmin)
+admin.site.register(Favorite, FavoriteAdmin)
