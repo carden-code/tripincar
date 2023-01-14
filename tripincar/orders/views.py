@@ -2,8 +2,8 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 
-from .models import Order
 from .forms import OrderForm
+from .models import Order
 
 User = get_user_model()
 

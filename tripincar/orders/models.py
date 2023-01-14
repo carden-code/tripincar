@@ -7,38 +7,52 @@ from phonenumber_field.modelfields import PhoneNumberField
 User = get_user_model()
 
 
+class City(models.Model):
+    name = models.CharField(
+        verbose_name='Город',
+        max_length=128,
+    )
+    slug = models.SlugField(unique=True)
+
+    class Meta:
+        verbose_name = 'Город'
+        verbose_name_plural = 'Города'
+
+    def __str__(self):
+        return f'{self.name}'
+
+
 class Airport(models.Model):
     name = models.CharField(
         verbose_name='Аэропорт',
         max_length=128,
     )
+    slug = models.SlugField(unique=True)
 
-    start_price = models.IntegerField(
-        verbose_name='Стартовая стоимость',
-    )
-    
     class Meta:
         verbose_name = 'Аэропорт'
         verbose_name_plural = 'Аэропорты'
     
     def __str__(self):
         return f'{self.name}'
-        
+
+
+class Route(models.Model):
+    city = models.ForeignKey(
+        City,
+        verbose_name='Город',
+        related_name='routes',
+        on_delete=models.SET_NULL,
+    )
+    airport = models.ForeignKey(
+        Airport,
+        verbose_name='Аэропорт',
+        related_name='routes',
+        on_delete=models.SET_NULL,
+    )
+
 
 class Order(models.Model):
-    
-    CITY_CHOICES = (
-        ('Рязань', 'Рязань'),
-        ('Тула', 'Тула'),
-        ('Владимир', 'Владимир'),
-    )
-    
-    AIRPORT_CHOICES = (
-        ('Домодедово', 'Домодедово'),
-        ('Внуково', 'Внуково'),
-        ('Шереметьево', 'Шереметьево'),
-        ('Жуковский', 'Жуковский'),
-    )
     
     number = models.IntegerField(
         verbose_name='Номер',
@@ -60,23 +74,15 @@ class Order(models.Model):
         null=True
     )
     
-    city = models.CharField(
-        verbose_name='Город',
-        max_length=128,
-        choices=CITY_CHOICES,
-        default='',
+    route = models.ForeignKey(
+        Route,
+        verbose_name='Маршрут',
+        on_delete=models.SET_NULL,
     )
     
     address = models.CharField(
         verbose_name='Адрес',
         max_length=256,
-    )
-    
-    airport = models.ForeignKey(
-        Airport,
-        verbose_name='Аэропорт',
-        on_delete=models.SET_NULL,
-        null=True
     )
     
     flight_number = models.CharField(
@@ -150,7 +156,7 @@ class Order(models.Model):
         ordering = ('-pub_date',)
         
     def __str__(self):
-        return f'{self.airport} -> {self.city}'
+        return f'{self.route}'
     
     def counter():
         

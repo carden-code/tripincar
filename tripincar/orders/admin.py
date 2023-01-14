@@ -1,16 +1,30 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 
-from .models import Airport, Favorite, Order
+from .models import Airport, City, Favorite, Order, Route
 
 User = get_user_model()
+
+
+class CityAdmin(admin.ModelAdmin):
+    list_display = (
+        'pl',
+        'name',
+    )
 
 
 class AirportAdmin(admin.ModelAdmin):
     list_display = (
         'pk',
         'name',
-        'start_price',
+    )
+
+
+class RouteAdmin(admin.ModelAdmin):
+    list_display = (
+        'pl',
+        'city',
+        'airport',
     )
 
 
@@ -21,12 +35,11 @@ class OrderAdmin(admin.ModelAdmin):
         'telephone',
         'pub_date',
         'update_date',
-        'city',
-        'airport',
+        'route',
         'driver',
         'status',
     )
-    search_fields = ('airport',)
+    search_fields = ('pub_date',)
     list_filter = ('pub_date',)
     empty_value_display = '-пусто-'
 
@@ -35,6 +48,8 @@ class FavoriteAdmin(admin.ModelAdmin):
     list_display = ('pk', 'driver', 'order')
  
 
-admin.site.register(Order, OrderAdmin)
 admin.site.register(Airport, AirportAdmin)
+admin.site.register(City, CityAdmin)
+admin.site.register(Route, RouteAdmin)
+admin.site.register(Order, OrderAdmin)
 admin.site.register(Favorite, FavoriteAdmin)
