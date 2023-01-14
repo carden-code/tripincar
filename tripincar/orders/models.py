@@ -12,7 +12,7 @@ class City(models.Model):
         verbose_name='Город',
         max_length=128,
     )
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, default='city')
 
     class Meta:
         verbose_name = 'Город'
@@ -27,7 +27,7 @@ class Airport(models.Model):
         verbose_name='Аэропорт',
         max_length=128,
     )
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, default='airport')
 
     class Meta:
         verbose_name = 'Аэропорт'
