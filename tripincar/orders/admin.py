@@ -8,7 +8,7 @@ User = get_user_model()
 
 class CityAdmin(admin.ModelAdmin):
     list_display = (
-        'pl',
+        'pk',
         'name',
     )
 
@@ -22,7 +22,7 @@ class AirportAdmin(admin.ModelAdmin):
 
 class RouteAdmin(admin.ModelAdmin):
     list_display = (
-        'pl',
+        'pk',
         'city',
         'airport',
     )

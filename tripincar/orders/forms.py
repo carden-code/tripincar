@@ -10,9 +10,8 @@ class OrderForm(ModelForm):
     class Meta:
         model = Order
         fields = (
-            'city',
+            'route',
             'address',
-            'airport',
             'date',
             'time',
             'departure_date',

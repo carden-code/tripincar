@@ -43,12 +43,14 @@ class Route(models.Model):
         verbose_name='Город',
         related_name='routes',
         on_delete=models.SET_NULL,
+        null=True
     )
     airport = models.ForeignKey(
         Airport,
         verbose_name='Аэропорт',
         related_name='routes',
         on_delete=models.SET_NULL,
+        null=True
     )
 
 
@@ -78,6 +80,7 @@ class Order(models.Model):
         Route,
         verbose_name='Маршрут',
         on_delete=models.SET_NULL,
+        null=True
     )
     
     address = models.CharField(
