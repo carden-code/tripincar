@@ -53,7 +53,14 @@ class Route(models.Model):
         null=True
     )
 
-
+    class Meta:
+        verbose_name = 'Маршрут'
+        verbose_name_plural = 'Маршруты'
+    
+    def __str__(self):
+        return f'{self.city} - {self.airport}'
+    
+    
 class Order(models.Model):
     
     number = models.IntegerField(

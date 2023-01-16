@@ -34,25 +34,8 @@ def order_detail(request, pk):
     }
     return render(request, template_name=template, context=context)
 
-#context ={}
-  
-    # dictionary for initial data with 
-    # field names as keys
-    # initial_dict = {
-    #     "title" : "My New Title",
-    #     "description" : " A New Description",
-    #     "available":True,
-    #     "email":"abc@gmail.com"
-    # }
-  
-    # # add the dictionary during initialization
-    # form = GeeksForm(request.POST or None, initial = initial_dict)
-  
-    # context['form']= form
-    # return render(request, "home.html", context)
-
 @login_required
-def order_create(request):
+def order_create_in_airport(request):
     """Обработчик создания заказа."""
     template = 'orders/create_order.html'
     phone = request.user.telephone
@@ -68,7 +51,35 @@ def order_create(request):
     if form.is_valid():
         order = form.save(commit=False)
         order.author = request.user
-        order.telephone = request.user.telephone
+        if not order.telephone:
+            order.telephone = request.user.telephone
+        order.save()
+        return redirect('orders:order_detail', order.pk)
+
+    context = {
+        'form': form
+    }
+    return render(request, template_name=template, context=context)
+
+@login_required
+def order_create_in_city(request):
+    """Обработчик создания заказа."""
+    template = 'orders/create_order.html'
+    phone = request.user.telephone
+    initial_dict = {
+        "telephone": phone
+    }
+    
+    form = OrderForm(
+        request.POST or None,
+        initial=initial_dict
+    )
+
+    if form.is_valid():
+        order = form.save(commit=False)
+        order.author = request.user
+        if not order.telephone:
+            order.telephone = request.user.telephone
         order.save()
         return redirect('orders:order_detail', order.pk)
 

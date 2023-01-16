@@ -11,9 +11,9 @@
           </li>
           {% for label in form %}
               <li class="list-group-item">
-                {% if label.label == 'Аэропорт' %}
+                {% if label.label == 'Маршрут' %}
                   {{ label.label }}:
-                  {{ order.airport }}
+                  {{ order.route }}
                 {% else %}
                   {{ label.label }}:
                   {{ label.value }}
